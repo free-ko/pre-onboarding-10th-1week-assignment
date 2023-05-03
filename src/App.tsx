@@ -1,14 +1,7 @@
-import { Header } from "~/components";
+import { HomePage } from "~/pages/Home";
 
 const App = () => {
-  return (
-    <>
-      <Header />
-      <section>
-        <h3>바디</h3>
-      </section>
-    </>
-  );
+  return <HomePage />;
 };
 
 export default App;
