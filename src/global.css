@@ -5,14 +5,16 @@
   --white-60: #F2F2F2;
   --white-90: #FEFEFE;
   --white-100: #FFFFFF;
-  --gray: #C4C4C4;
+  --gray-light: #a7afb7;
+  --gray: #7B736A;
   --gray-bg: #F0F1F4;
   --blue-main: #007BE9;
   --blue-sky: #CAE9FF;
 
   /*Font-Size*/
   --size-Large: 34px;
-  --size-regular: 16;
+  --size-regular: 16px;
+  --size-small: 13px;
 
   /*Font-Weight*/
   --weight-bold: 700;
@@ -56,6 +58,11 @@ body {
 
 ol, ul {
   list-style: none;
+}
+
+li {
+  list-style: none;
+
 }
 
 blockquote, q {

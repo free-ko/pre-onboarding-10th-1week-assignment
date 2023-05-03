@@ -21,9 +21,9 @@ export const InputWrapper = styled.div<{ $width?: string }>`
   padding: 0 12px;
 
   outline: none;
-  border: 2px solid #fff;
   border-radius: 42px;
-  background-color: #fff;
+  border: 2px solid #fff;
+  background-color: var(--white-100);
 
   transition: border-color 0.2s ease-in-out;
 

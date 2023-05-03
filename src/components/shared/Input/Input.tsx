@@ -10,6 +10,7 @@ import {
 import * as Styled from "./Input.styled";
 
 type InputProps = {
+  isFocus: boolean;
   placeholder: string;
   inputValue?: string;
   hasSearchIcon?: boolean;
@@ -25,6 +26,7 @@ type InputProps = {
 const Input = forwardRef<HTMLInputElement, InputProps>(
   (
     {
+      isFocus,
       placeholder,
       inputValue,
       hasSearchIcon = true,
@@ -38,22 +40,16 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     },
     ref
   ) => {
-    const [isFocus, setIsFocus] = useState(false);
-
     const handleFocus = (event: FocusEvent<HTMLInputElement>) => {
       if (typeof onFocus === "function") {
         onFocus(event);
       }
-
-      setIsFocus(true);
     };
 
     const handleBlur = (event: FocusEvent<HTMLInputElement>) => {
       if (typeof onBlur === "function") {
         onBlur(event);
       }
-
-      setIsFocus(false);
     };
 
     const handleEnterPress = (event: KeyboardEvent<HTMLInputElement>) => {
