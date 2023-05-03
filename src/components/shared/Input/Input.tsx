@@ -1,9 +1,11 @@
 import { useState, forwardRef } from "react";
-import { useRouter } from "next/router";
 import type { FocusEvent, KeyboardEvent, ChangeEvent, MouseEvent } from "react";
 
-import { IconArrowBack, IconSearch } from "public/svg";
-import { IconClose } from "public/svg";
+import {
+  IconClose,
+  IconSearch,
+  IconArrowBack,
+} from "~/components/shared/Icons";
 
 import * as Styled from "./Input.styled";
 
@@ -12,7 +14,6 @@ type InputProps = {
   inputValue?: string;
   hasSearchIcon?: boolean;
   hasArrowBackIcon?: boolean;
-  hasCloseIcon?: boolean;
   style?: { width: string };
   onClear?: (event: MouseEvent) => void;
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
@@ -28,7 +29,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       inputValue,
       hasSearchIcon = true,
       hasArrowBackIcon = false,
-      hasCloseIcon = false,
       style,
       onFocus,
       onBlur,
@@ -38,7 +38,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     },
     ref
   ) => {
-    const router = useRouter();
     const [isFocus, setIsFocus] = useState(false);
 
     const handleFocus = (event: FocusEvent<HTMLInputElement>) => {
@@ -70,13 +69,14 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     };
 
     const handleClearInput = (event: MouseEvent) => {
+      event.preventDefault();
       if (typeof onClear === "function") {
         onClear(event);
       }
     };
 
     const handleBackClick = () => {
-      void router.push("/");
+      // Tablet & Mobile 화면일 때, 검색 창을 꺼야 함
     };
 
     return (
@@ -89,31 +89,34 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             <IconArrowBack />
           </Styled.IconArrowBackWrapper>
         )}
+
         <Styled.InputWrapper tabIndex={0} $width={style?.width}>
-          {hasSearchIcon && (
-            <Styled.IconSearchWrapper aria-hidden={true}>
-              <IconSearch isActive={isFocus} />
-            </Styled.IconSearchWrapper>
-          )}
+          {!isFocus && <IconSearch size="21" color=" #a7afb7" />}
 
           <Styled.Input
             ref={ref}
             type="text"
             defaultValue={inputValue}
-            placeholder={placeholder}
+            placeholder={isFocus ? "" : placeholder}
             onFocus={handleFocus}
             onBlur={handleBlur}
             onChange={handleChange}
             onKeyDown={handleEnterPress}
           />
 
-          {hasCloseIcon && (
+          {isFocus && (
             <Styled.IconCloseWrapper
               aria-hidden={true}
-              onClick={handleClearInput}
+              onMouseDown={handleClearInput}
             >
               <IconClose />
             </Styled.IconCloseWrapper>
+          )}
+
+          {hasSearchIcon && (
+            <Styled.IconSearchWrapper type="button" aria-hidden={true}>
+              <IconSearch size="24" color="#FFF" />
+            </Styled.IconSearchWrapper>
           )}
         </Styled.InputWrapper>
       </Styled.InputContainer>

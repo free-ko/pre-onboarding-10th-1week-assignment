@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 export const InputContainer = styled.div`
   display: flex;
   gap: 12px;
+  justify-content: center;
   align-items: center;
 
   width: 100%;
@@ -15,23 +16,19 @@ export const InputWrapper = styled.div<{ $width?: string }>`
   align-items: center;
 
   width: ${({ $width }) => ($width ? $width : "560px")};
-  height: 48px;
+  height: 72px;
 
-  padding-right: 19px;
+  padding: 0 12px;
 
   outline: none;
-  border: 1px solid #c2c6ce;
-  border-radius: 1000px;
+  border: 2px solid #fff;
+  border-radius: 42px;
   background-color: #fff;
 
   transition: border-color 0.2s ease-in-out;
 
-  &:hover {
-    border-color: #959ca6;
-  }
-
   &:focus-within {
-    border-color: #00c3cc;
+    border-color: var(--blue-main);
   }
 `;
 
@@ -41,14 +38,14 @@ export const Input = styled.input`
   font-size: 16px;
   font-weight: 400;
 
-  margin-left: 16px;
+  margin-left: 6px;
 
   color: #33373d;
   caret-color: #00c3cc;
   background-color: #fff;
 
   &::placeholder {
-    color: #c2c6ce;
+    color: #a7afb7;
   }
 
   &:focus {
@@ -73,10 +70,17 @@ export const IconArrowBackWrapper = styled.span`
   }
 `;
 
-export const IconSearchWrapper = styled.span`
-  margin-left: 17px;
+export const IconCloseWrapper = styled.span`
+  margin-right: 8px;
+  cursor: pointer;
 `;
 
-export const IconCloseWrapper = styled.span`
-  cursor: pointer;
+export const IconSearchWrapper = styled.button`
+  flex-shrink: 0;
+
+  width: 48px;
+  height: 48px;
+
+  border-radius: 50%;
+  background-color: var(--blue-main);
 `;
