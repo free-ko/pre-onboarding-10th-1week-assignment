@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-import { SearchBar } from "~/components/search";
+import { Search } from "~/components/search";
 import { GapUpDownBy } from "~/components/shared";
 
 const Wrapper = styled.div`
@@ -34,7 +34,7 @@ const HomePage = () => {
         국내 모든 임상시험 검색하고 <br /> 온라인으로 참여하기
       </Styled.Title>
       <GapUpDownBy $height={24} />
-      <SearchBar />
+      <Search />
     </Styled.Wrapper>
   );
 };
