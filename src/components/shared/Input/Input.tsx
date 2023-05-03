@@ -1,4 +1,4 @@
-import { useState, forwardRef } from "react";
+import { forwardRef } from "react";
 import type { FocusEvent, KeyboardEvent, ChangeEvent, MouseEvent } from "react";
 
 import {
