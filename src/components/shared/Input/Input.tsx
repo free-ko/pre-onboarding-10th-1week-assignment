@@ -37,7 +37,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       onClear,
       onChange,
       onKeyDown,
-      onEnterPress,
     },
     ref
   ) => {
