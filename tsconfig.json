@@ -26,33 +26,6 @@
       "~/*": [
         "src/*"
       ],
-      "~/components/*": [
-        "components/*"
-      ],
-      "~/constants/*": [
-        "constants/*"
-      ],
-      "~/hooks/*": [
-        "hooks/*"
-      ],
-      "~/pages/*": [
-        "pages/*"
-      ],
-      "~/routes/*": [
-        "routes/*"
-      ],
-      "~/services/*": [
-        "services/*"
-      ],
-      "~/styles/*": [
-        "styles/*"
-      ],
-      "~/types/*": [
-        "types/*"
-      ],
-      "~/utils/*": [
-        "utils/*"
-      ],
     },
   },
   "include": ["src"],
