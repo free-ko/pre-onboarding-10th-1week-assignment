@@ -20,7 +20,7 @@ type InputProps = {
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   onFocus?: (event: FocusEvent<HTMLInputElement>) => void;
   onBlur?: (event: FocusEvent<HTMLInputElement>) => void;
-  onEnterPress: (event: KeyboardEvent<HTMLInputElement>) => void;
+  onKeyDown: (event: KeyboardEvent<HTMLInputElement>) => void;
 };
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
@@ -36,6 +36,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       onBlur,
       onClear,
       onChange,
+      onKeyDown,
       onEnterPress,
     },
     ref
@@ -52,9 +53,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       }
     };
 
-    const handleEnterPress = (event: KeyboardEvent<HTMLInputElement>) => {
-      if (typeof onEnterPress === "function" && event.key === "Enter") {
-        onEnterPress(event);
+    const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+      if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+        onKeyDown(event);
       }
     };
 
@@ -97,7 +98,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             onFocus={handleFocus}
             onBlur={handleBlur}
             onChange={handleChange}
-            onKeyDown={handleEnterPress}
+            onKeyDown={handleKeyDown}
           />
 
           {isFocus && (

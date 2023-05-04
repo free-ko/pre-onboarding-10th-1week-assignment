@@ -1,7 +1,8 @@
-import { useRef, useState } from "react";
+import { KeyboardEvent, useRef, useState } from "react";
 import styled from "@emotion/styled";
 
 import { Input } from "~/components/shared/Input";
+import { recommendSearchQueryList } from "./mockData";
 import { SearchingInfo } from "./SearchingInfo";
 
 const Wrapper = styled.div`
@@ -16,6 +17,7 @@ const Search = () => {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [isFocus, setIsFocus] = useState(false);
   const [inputValue, setInputValue] = useState("");
+  const [selectedItemIdx, setSelectedItemIdx] = useState<number>(-1);
 
   const handleFocus = () => {
     setIsFocus(true);
@@ -23,14 +25,6 @@ const Search = () => {
 
   const handleBlur = () => {
     setIsFocus(false);
-  };
-
-  const handleEnterPress = () => {
-    const searchData = inputRef.current?.value.trim();
-
-    if (!searchData) {
-      return alert("검색어를 입력해주세요.");
-    }
   };
 
   const handleChange = () => {
@@ -48,6 +42,36 @@ const Search = () => {
     setInputValue("");
   };
 
+  const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+    let itemIdx = -1;
+
+    switch (event.key) {
+      case "ArrowUp":
+        itemIdx =
+          selectedItemIdx > -1
+            ? selectedItemIdx - 1
+            : recommendSearchQueryList.length - 1;
+
+        setSelectedItemIdx(itemIdx);
+
+        break;
+      case "ArrowDown":
+        itemIdx =
+          selectedItemIdx < recommendSearchQueryList.length - 1
+            ? selectedItemIdx + 1
+            : -1;
+        setSelectedItemIdx(itemIdx);
+        break;
+      default:
+        break;
+    }
+  };
+
+  const createSelectedItemClassName =
+    (selectedItemIdx: number) => (currentIdx: number) => {
+      return selectedItemIdx === currentIdx ? "selected" : "";
+    };
+
   return (
     <Styled.Wrapper>
       <Input
@@ -59,10 +83,24 @@ const Search = () => {
         onFocus={handleFocus}
         onChange={handleChange}
         onClear={handleClearInput}
-        onEnterPress={handleEnterPress}
+        onKeyDown={handleKeyDown}
         style={{ width: "490px" }}
       />
-      {isFocus && <SearchingInfo inputValue={inputValue} />}
+      {/*{isFocus && (*/}
+      {/*  <SearchingInfo*/}
+      {/*    inputValue={inputValue}*/}
+      {/*    createSelectedItemClassName={createSelectedItemClassName(*/}
+      {/*      selectedItemIdx*/}
+      {/*    )}*/}
+      {/*  />*/}
+      {/*)}*/}
+
+      <SearchingInfo
+        inputValue={inputValue}
+        createSelectedItemClassName={createSelectedItemClassName(
+          selectedItemIdx
+        )}
+      />
     </Styled.Wrapper>
   );
 };

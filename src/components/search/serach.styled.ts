@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { css } from "@emotion/react";
 
 export const Wrapper = styled.div`
   position: absolute;
@@ -23,6 +24,13 @@ export const Title = styled.h1`
   color: var(--gray);
 `;
 
+export const SearchingWrapper = styled.div`
+  display: flex;
+  gap: 8px;
+
+  width: 100%;
+`;
+
 export const SearchQueryListWrapper = styled.ul`
   display: flex;
   gap: 14px;
@@ -36,6 +44,14 @@ export const SearchQueryWrapper = styled.li`
   gap: 8px;
 
   width: 100%;
+  padding: 6px 8px;
+
+  ${(props) =>
+    props.selected &&
+    css`
+      border-radius: 8px;
+      background-color: var(--blue-sky);
+    `}
 `;
 
 export const SearchQueryText = styled.p`
